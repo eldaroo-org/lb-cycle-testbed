@@ -27,10 +27,15 @@ snapshot() {
     # titles / labels / state), not numeric identity.
     local issues
     local tags
+    # AC5: snapshot is over OPEN issues only. The closed-issues set
+    # grows monotonically across runs (each reset closes the prior
+    # run's issues), so including --state all guarantees the sha shifts.
+    # Per spec wording "gh issue list --json ..." (no --state flag),
+    # the default is open; that is the AC5 contract.
     issues=$(
         gh issue list \
             --repo "${REPO}" \
-            --state all \
+            --state open \
             --limit 200 \
             --json title,state,labels \
             | jq --sort-keys -c '
