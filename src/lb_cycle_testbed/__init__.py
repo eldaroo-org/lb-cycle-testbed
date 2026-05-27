@@ -10,4 +10,4 @@ def the_answer() -> int:
     implementation returns 0, so the test fails. autodev's job in the
     sandbox loop is to fix this function and prove the round-trip.
     """
-    return 42
+    return 0
